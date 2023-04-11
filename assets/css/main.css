@@ -80,6 +80,10 @@ input, select, textarea {
   background-color: hsla(0, 0%, 100%, 0.75);
   height: 70px;
   padding: 20px 50px;
+	display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+          flex-direction: row;
   -webkit-align-items: center;
   align-items: center;
 	text-align: right;
@@ -88,8 +92,16 @@ input, select, textarea {
   z-index: 10
 }
 
+.etl-logo {
+	height: 30px;
+}
+
 
 .navbar-options {
+	display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+          flex-direction: row;
 	z-index: 2;
 	font-size: 20px;
 	
