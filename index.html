@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>Elsie's Website</title>
+		<title>Elsie Liu</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -16,9 +16,9 @@
 
 		<div class="navbar">
 			<div class="navbar-options">
-				<a href="#about">About</a>
-				<a href="#projects">Projects</a>
-				<a href="#">Contact</a>
+				<a style="text-decoration: none;" href="#about">About</a>
+				<a style="text-decoration: none;" href="#projects">Projects</a>
+				<a style="text-decoration: none;" href="#">Contact</a>
 			</div>
 			
 		</div>
@@ -69,26 +69,30 @@
 				<!-- Two -->
 					<section class="spotlight style1 orient-right content-align-left image-position-center onscroll-image-fade-in" id="first">
 						<div class="content">
-							<h2>Pantry Pal</h2>
-							<p>I'm a student majoring in Computer Science and minoring in Business at Cornell University. Previously, I've researched accessibility and intelligent screen-readers, and interned at Novartis and Nuance Communications. </p>
-							<p>I enjoy learning about the intersection between humans and technology and am interested in exploring ways in which technology can enhance our everyday lives.</p>
-							<p>Outside of work, you can find me dabbling in art and listening to music.</p>
+							<header>
+								<h2>Pantry Pal</h2>
+								<p>Building a recipe recommendation engine.</p>
+							</header>
+							<p>Coursework - Frontend development, implementation of similarity algorithms, usability testing.</p>
 							<ul class="actions stacked">
-								<li><a href="#" class="button">Learn More</a></li>
+								<li><a href="pantrypal.html" class="button">Learn More</a></li>
 							</ul>
 						</div>
 						<div class="image">
-							<img src="images/363-351-545_b688_133.jpg" alt="" />
+							<img src="images/pantrypal.jpg" alt="" />
 						</div>
 					</section>
 
 				<!-- Three -->
 					<section class="spotlight style1 orient-left content-align-left image-position-center onscroll-image-fade-in">
 						<div class="content">
-							<h2>Database Management System</h2>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id ante sed ex pharetra lacinia sit amet vel massa. Donec facilisis laoreet nulla eu bibendum. Donec ut ex risus. Fusce lorem lectus, pharetra pretium massa et, hendrerit vestibulum odio lorem ipsum dolor sit amet.</p>
+							<header>
+								<h2>Database Management System</h2>
+								<p>Implementing a functional DBMS</p>
+							</header>
+							<p>Coursework - Backend development, Java, PostgreSQL</p>
 							<ul class="actions stacked">
-								<li><a href="#" class="button">Learn More</a></li>
+								<li><a href="dbms.html" class="button">Learn More</a></li>
 							</ul>
 						</div>
 						<div class="image">
@@ -99,8 +103,11 @@
 				<!-- Four -->
 					<section class="spotlight style1 orient-right content-align-left image-position-center onscroll-image-fade-in">
 						<div class="content">
-							<h2>I Love Hue</h2>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id ante sed ex pharetra lacinia sit amet vel massa. Donec facilisis laoreet nulla eu bibendum. Donec ut ex risus. Fusce lorem lectus, pharetra pretium massa et, hendrerit vestibulum odio lorem ipsum dolor sit amet.</p>
+							<header>
+								<h2>I Love Hue</h2>
+								<p>Creating a game using OCaml</p>
+							</header>
+							<p>Coursework - Backend development, OCaml</p>
 							<ul class="actions stacked">
 								<li><a href="#" class="button">Learn More</a></li>
 							</ul>
@@ -338,7 +345,7 @@
 					</section> -->
 
 				<!-- Seven -->
-					<section class="wrapper style1 align-center">
+					<section id="contact" class="wrapper style1 align-center">
 						<div class="inner medium">
 							<h2>Get in touch</h2>
 							<form method="post" action="#">
