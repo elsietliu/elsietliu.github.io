@@ -121,7 +121,8 @@ input, select, textarea {
   margin-top: 10px;
 }
 .social-icon {
-  margin-right: 22px;
+	margin-left: 11px;
+  margin-right: 11px;
 }
 
 .header {
