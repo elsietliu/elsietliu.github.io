@@ -2738,6 +2738,8 @@ input, select, textarea {
 				width: 100%;
 			}
 
+	
+
 /* List */
 
 	ol {
@@ -7469,6 +7471,17 @@ input, select, textarea {
 
 	.gallery article .image {
 		background-color: rgba(0, 0, 0, 0.125);
+	}
+
+	.wrapper.style1 > .inner .headshot-image {
+		border: 0;
+		border-radius: 4px;
+		display: block;
+		position: relative;
+		width:20%;
+		margin-left: auto;
+  	margin-right: auto;
+
 	}
 
 /* Wrapper (style1) */
