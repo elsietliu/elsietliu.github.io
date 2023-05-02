@@ -96,36 +96,124 @@
 								I aimed to create a simple and intuitive interface that would 
 								provide users with an easy way to discover new recipes.<br>
 								I chose to use a two-part form that would walk the user through 
-								each of the steps. The first part includes a text bar that 
-								allows the user to input the ingredients they have. The second 
-								section includes the option to choose mandatory ingredients that 
-								must be included in the dish as well as any dietary restrictions, 
-								the category of food (main dish, appetizer, etc.), and the time 
-								it takes to make the dish. <br>
-								Each part of the form also includes a reset button that allows 
-								the user to easily clear any section of the form.
+								each of the steps. On top of the forms, there is a visual cue
+								that indicates which step you are at in the process. Each part 
+								of the form also includes a reset button that allows the user 
+								to easily clear any section of the form.
 							</p>
+							<p style="text-align:center">
+								<img src="images/pantrypal/visual_cue.gif" width="500" alt="demonstration of visual cue as user switches between forms">
+							</p>
+							<p>
+								The first part includes a text bar that 
+								allows the user to input the ingredients they have. Th user is 
+								able to input add ingredients using the 'Add' button as well as
+								pressing the enter key.
+							</p>
+							<p style="text-align:center">
+								<img src="images/pantrypal/enter_ingredients.gif" width="500" alt="adding chicken, celery, and carrot as ingredients">
+							</p>
+							<p>
+								In addition to adding ingredients, the user can also delete the 
+								ingredients that they've previously entered by clicking on the 
+								'x' on each ingredient element.
+							</p>
+							<p style="text-align:center">
+								<img src="images/pantrypal/delete_ingredients.gif" width="500" alt="deleting chicken, celery, and carrot from list of ingredients that were previously entered">
+							</p>
+							<p>
+								The second section includes the option to choose mandatory 
+								ingredients that must be included in the dish as well as any 
+								dietary restrictions, the category of food (main dish, 
+								appetizer, etc.), and the time it takes to make the dish.
+							</p>
+							<p style="text-align:center">
+								<img src="images/pantrypal/optional_ings.gif" width="500" alt="demonstration of choosing mandatory ingredients">
+							</p>
+							<p>
+								I ensured that the clickable elements are cohesive to make it 
+								clear to the user that what they can alter. When user testing, 
+								we recieved feedback that the ability to choose which ingredients 
+								are required in the recipe was missed in an earlier prototype of
+								the site. As a result, I decided to make the design more uniform.
+							</p>
+							<p style="text-align:center">
+								<img src="images/pantrypal/spinny_buttons.gif" width="500" alt="demonstration of uniform buttons in the selection of mandatory ingredients and dietary restrictions">
+							</p>
+							
 							<h2>Algorithm</h2>
 							<p>
 								Given a list of ingredients from the user, we query a database 
-								of foods from Food.com. We use an inverted index representation 
-								for the database that maps the ingredients to a list of dishes 
-								that use that ingredient. The algorithm then finds all the 
-								dishes that contain the ingredients inputted by the user. Then, 
-								the dishes that contain any potential allergens are filtered 
-								out, as well as any dishes that don't correspond with the 
-								category and time filters inputted by the user. Finally, the 
-								dishes are outputted and ranked using Jaccard, so that dishes 
-								with more ingredients that are not inputted by the user are 
-								ranked lower. Any ties between the Jaccard scores are broken by
-								the rating of each recipe.
-
+								of foods from Food.com. 
+							<h3>Basic Text Processing</h3>
+							<ul>
+								<li>We used regex to extract and clean the ingredient list from the SQL file</li>
+								<li>We used stemming on the ingredients in the database and input from the users so that plural ingredients were mapped to the same name (ex: egg and eggs)</li>
+								<li>We made sure to deduplicate user input so that certain ingredients were not given more weight when we rated them</li>
+							</ul>
+							<h3>Inverted Index</h3>
+							<ul>
+								<li>Since we had a lot of recipes in our dataset, we created an inverted index where the key is the ingredient and the value is a list of recipes that contain the ingredient</li>
+								<li>This allowed for our information retrieval to be much quicker than looking through each recipe one at a time</li>
+								<li>We also used an inverted index for the allergies in which each allergy was mapped to a list of dishes that conflict with the allergy</li>
+							</ul>
+							<h3>Boolean Search</h3>
+							<ul>
+								<li>We used boolean search to find recipes that contain the required ingredients inputted by the user (ex: egg AND flour AND water)</li>
+								<li>We used boolean search to remove any recipes that contain certain allergens (ex: lettuce AND tomato NOT meat)</li>
+							</ul>
+							<h3>Jaccard Similarity</h3>
+							<ul>
+								<li>As one component to evaluate the ranking of the recipe based on the query, we used Jaccard similarity. We calculate the similarity between the recipe ingredient list and the list of ingredients that the user inputted</li>
+								<li>This allows us to prioritize recipes that have a closer ingredient similarity to the query</li>
+							</ul>
+							<h3>Word-Document Matrix</h3>
+							<ul>
+								<li>To implement our LDA model, we used the built-in method in gensim to convert the reviews into bag-of-words format</li>
+							</ul>
 							</p>
-							<h2>Produced Output</h2>
+							<h2>Input/Output Examples</h2>
 							<p>
 								The output is a list of up to 20 dishes that are based on the 
-								user's input. Each output contains a link to the recipe as well 
-								as a list of the ingredients required to make it.
+								user's input. For situations in which the user's inputs, the 
+								system will output a list that displays the recipe name, link, 
+								rating based on user reviews, and ingredient list.
+							</p>
+							<p style="text-align:center">
+								<img src="images/pantrypal/results.gif" width="500" alt="input/output example with proper inputs produces list of recipes">
+							</p>
+							<p>
+								In the example above, all the ingredients and preferences inputted 
+								by the user were proper. As a result, the system was able to 
+								find a few recipes that fit the criteria set by the user.
+							</p>
+							<p>
+								In contrast, if there are improper preferences entered by the user, 
+								or there are no recipes within the database that fit the user's 
+								requests, then an error message will be produced instead of a list 
+								of recipes.
+							</p>
+							<p style="text-align:center">
+								<img src="images/pantrypal/bad_input.gif" width="500" alt="input/output example with conflicting inputs produces 'no recipe found' error message">
+							</p>
+							<p>
+								In this example, the user inputted 'egg' as the mandatory ingredient 
+								and set the dietary restriction as 'egg-free'. Because there are 
+								conflicting inputs, there does not exist a recipe in which both 
+								are true. Therefore, the system produces a 'no recipe found' 
+								error message to indicate that the system compiled but there 
+								are simply no recipes that meet the requirements.
+							</p>
+							<p style="text-align:center">
+								<img src="images/pantrypal/improper_ings.gif" width="500" alt="input/output example with no ingredients inputted produces 'no proper ingredient entered' error message">
+							</p>
+							<p>
+								Likewise, if there are improper ingredients inputted, or missing 
+								inputs, a similar message will be outputted by the system. In this 
+								final example, the user did not input anything. Because the system 
+								depends on ingredients to filter out possible recipes, it is 
+								unable to process anything. As a result, instead of a list of recipes, 
+								there is a 'no proper ingredient entered' error message.
 							</p>
 						</div>
 						<section class="wrapper style1 align-right">

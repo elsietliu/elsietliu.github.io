@@ -2748,6 +2748,10 @@ input, select, textarea {
 				width: 100%;
 			}
 
+	video#ilovehuevid {
+		object-fit: cover;
+	}
+
 	
 
 /* List */
